@@ -9,13 +9,6 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Heart, Sparkles, ArrowDown } from "lucide-react"
 import Image from "next/image"
 import dynamic from "next/dynamic"
-import img1 from "@/components/images/i7.jpeg"
-import img2 from "@/components/images/i6.jpeg"
-import img3 from "@/components/images/i5.jpeg"
-import img4 from "@/components/images/i4.jpeg"
-import img5 from "@/components/images/i3.jpeg"
-import img6 from "@/components/images/i2.jpeg"
-import img7 from "@/components/images/img1.jpeg"
 
 // Create a client-only component for Tenor GIFs
 const TenorGif = dynamic(
@@ -73,35 +66,35 @@ export default function BirthdayWebsite() {
     [],
   )
 
-  // Add this after your state declarations
+  // Memory photos with fallback to placeholder
   const memories = [
     {
-      src: img1,
+      src: "/images/i7.jpeg",
       alt: "Ganga Arati",
       caption: "Ganga Arati 🕉️✨",
     },
     {
-      src: img2,
+      src: "/images/i6.jpeg",
       alt: "vuk",
       caption: "Bohot vuk lag geya tha yrrr...😋",
     },
     {
-      src: img3,
+      src: "/images/i5.jpeg",
       alt: "Shopping...",
       caption: "Shopping...😚",
     },
     {
-      src: img7,
+      src: "/images/img1.jpeg",
       alt: "Baba Ka Darsan",
       caption: "Baba Ka Darsan 🙏🕉️",
     },
     {
-      src: img5,
+      src: "/images/i3.jpeg",
       alt: "Our first date",
       caption: "First Meet 💕",
     },
     {
-      src: img6,
+      src: "/images/i2.jpeg",
       alt: "Weekend getaway",
       caption: "Me & my love ❤️🌚✨",
     },
@@ -370,6 +363,10 @@ export default function BirthdayWebsite() {
                           width={200}
                           height={200}
                           className="w-full h-48 object-cover"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement
+                            target.src = `/placeholder.svg?height=200&width=200&query=${encodeURIComponent(memory.alt)}`
+                          }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-pink-500/20 to-transparent"></div>
                         <div className="absolute bottom-2 left-2 right-2">
